@@ -21,13 +21,12 @@ function init(){
     }
     turnCount = 0;
     winner=0;
-    turn = 1; //initialize turn to be P1 (X).
-    msg.textContent='Player X, pick a square';
+    turn = 1; //initialize turn to be Player X
+    msg.textContent='Player X, pick a square'; //render message for Player X to start
 }
 
 function handleClick(evt){
-    //get the index of the squares clicked on
-    boardId = evt.target.id;
+    boardId = evt.target.id; //get the index of the squares clicked on
     row = parseInt(boardId[2]);
     col = parseInt(boardId[3]);
     
@@ -43,11 +42,6 @@ function handleClick(evt){
     turnCount++;
     checkWinner();
     render(boardId);
-
-    
-    //getWinner();
-    console.log(winner);
-    console.log(turnCount);
 }
 
 function checkWinner(){
@@ -76,34 +70,24 @@ function checkWinner(){
         }
     }
     //check diagonal totals
-    // let diagTotal1 =0;
-    // diagTotal1 += gameBoardArr[0][0] + gameBoardArr[1][1] + gameBoardArr[2][2];
-    // let diagTotal2 =0;
-    // diagTotal1 += gameBoardArr[2][0] + gameBoardArr[1][1] + gameBoardArr[0][2];
-    // if(diagTotal1 === 3 || diagTotal2 ===3){
-    //     winner = 1; return winner;
-    // } else if(diagTotal1 ===-3 || diagTotal2===-3){
-    //     winner = -1; return winner;
-    // }
-}
-
-function getWinner(){
-    if (winner===1){
-        msg.textContent = `Congratulations! Player X is the winner!`;
-    } else if (winner === -1){
-        msg.textContent = `Congratulations! Player O is the winner!`;
-    } else return;
+    let diagTotal1 =0;
+    diagTotal1 += gameBoardArr[0][0] + gameBoardArr[1][1] + gameBoardArr[2][2];
+    let diagTotal2 =0;
+    diagTotal2 += gameBoardArr[2][0] + gameBoardArr[1][1] + gameBoardArr[0][2];
+    if(diagTotal1 === 3 || diagTotal2 ===3){
+        winner = 1; return winner;
+    } else if(diagTotal1 ===-3 || diagTotal2===-3){
+        winner = -1; return winner;
+    }
 }
 
 function render(boardId){
     let square =  document.getElementById(boardId);
-
-    //change board
-    if (gameBoardArr[row][col]===1){
+    if (gameBoardArr[row][col]===1){ //change board
         square.innerHTML = "X";   //using innerHTML cuz actually changing HTML of it. (if it were a button you'd change the txtContent)
     } else square.innerHTML = "O";
 
-    //display player or winner message
+    //render message
     if (winner ===0){
         if (turnCount === 9){
             msg.textContent = 'This game is a draw.';
@@ -118,21 +102,3 @@ function render(boardId){
 }
 
 init();
-
-/*Psuedocode
-initialize the board. 
-- initialize game board array to 0
-- for html, the boardid is the arrayindex
-display message that player [x] to select square
-user clicks square
-handle square click 
-- if gameBoardArray val = 0,
-    if player X, add 1 into array
-    else add -1 into the array
-
-- render add X or O
-check if win
-play again button
-
-document.getElementByID for the target
-*/
