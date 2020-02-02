@@ -32,18 +32,20 @@ function handleClick(evt){
     col = parseInt(boardId[3]);
     
     //change value of gameArray to 1 or -1
-    if (gameBoardArr[row][col]===0){ //if sq is empty
+    if(winner !== 0){ //do nothing if someone wins
+        return;
+    } else if (gameBoardArr[row][col]===0){ //if sq is empty
         if (turn ===1){
             gameBoardArr[row][col] = 1;
         } else gameBoardArr[row][col] = -1;
-      
-    } else return; //do nothing if gameBoardArr value != 0, already taken
+    } else return; //do nothing if gameBoardArr value !== 0 b/c it's already taken
     turn *= -1;
     turnCount++;
+    checkWinner();
     render(boardId);
 
-    checkWinner();
-    getWinner();
+    
+    //getWinner();
     console.log(winner);
     console.log(turnCount);
 }
@@ -93,10 +95,6 @@ function getWinner(){
     } else return;
 }
 
-// Render function:
-// Displays the current state of the board
-// on the page, updating the elements to reflect
-// either X or O depending on whose turn it is
 function render(boardId){
     let square =  document.getElementById(boardId);
 
