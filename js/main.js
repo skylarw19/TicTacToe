@@ -25,6 +25,7 @@ function replay(){
     document.getElementById('sq21').innerHTML = "";
     document.getElementById('sq22').innerHTML = "";
     init();
+
     
 }
 

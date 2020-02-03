@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
+    font-family: 'Indie Flower', cursive;
 }
 
 section.board {
@@ -26,4 +27,6 @@ button{
     margin: auto;
     padding: 1.5vmin;
     border-radius: 2vmin;
+    font-family: 'Indie Flower', cursive;
+    font-size: 3vmin;
 }
