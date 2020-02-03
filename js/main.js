@@ -14,7 +14,7 @@ replayBtn.addEventListener('click',replay);
 
 /*------Functions------*/
 function replay(){
-    //clear game board
+    //clear game board - could use a loop to go thru this
     document.getElementById('sq00').innerHTML = "";
     document.getElementById('sq01').innerHTML = "";
     document.getElementById('sq02').innerHTML = "";
@@ -25,6 +25,7 @@ function replay(){
     document.getElementById('sq21').innerHTML = "";
     document.getElementById('sq22').innerHTML = "";
     init();
+    
 }
 
 function init(){
