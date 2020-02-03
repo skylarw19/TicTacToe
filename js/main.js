@@ -1,17 +1,35 @@
 /*------Constants------*/
 
 /*------Variables (state)------*/
-let gameBoardArr, turn, winner, boardId, row, col, turnCount;
+let gameBoardArr, turn, winner, boardId, row, col, turnCount, isGameOver;
 
 /*------Cached Element References------*/
 const msg = document.getElementById('message');
+const replayBtn = document.getElementsByTagName('button')[0]; //gets collection since ElementS, so use index 0 for the first (and only in this case)
+const board = document.querySelector('section.board');
 
 /*------Event Listeners------*/
-document.querySelector('.board').addEventListener('click',handleClick);
+board.addEventListener('click',handleClick);
+replayBtn.addEventListener('click',replay);
 
 /*------Functions------*/
+function replay(){
+    //clear game board
+    document.getElementById('sq00').innerHTML = "";
+    document.getElementById('sq01').innerHTML = "";
+    document.getElementById('sq02').innerHTML = "";
+    document.getElementById('sq10').innerHTML = "";
+    document.getElementById('sq11').innerHTML = "";
+    document.getElementById('sq12').innerHTML = "";
+    document.getElementById('sq20').innerHTML = "";
+    document.getElementById('sq21').innerHTML = "";
+    document.getElementById('sq22').innerHTML = "";
+    init();
+}
+
 function init(){
     //initialize values of gameBoard array to be 0
+    isGameOver = false;
     gameBoardArr=new Array(3);
     for (let i=0; i<gameBoardArr.length; i++){
         gameBoardArr[i] = new Array(3);
@@ -91,13 +109,16 @@ function render(boardId){
     if (winner ===0){
         if (turnCount === 9){
             msg.textContent = 'This game is a draw.';
+            isGameOver = true;
         } else if(turn === 1){
             msg.textContent = 'Player X, pick a square.';
         } else msg.textContent = 'Player O, pick a square.';
     } else if (winner===1){
         msg.textContent = `Congratulations! Player X is the winner!`;
+        isGameOver = true;
     } else if (winner === -1){
         msg.textContent = `Congratulations! Player O is the winner!`;
+        isGameOver = true;
     } else return;
 }
 
